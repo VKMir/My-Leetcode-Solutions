@@ -1,0 +1,21 @@
+class Solution {
+public:
+    vector<int> twoSum(vector<int>& nums, int target) {
+        int n = nums.size();
+        vector<int> ans(2);
+        unordered_map<int, int> mmap;
+        for(int i = 0; i < n; i++){
+            int rem = target - nums[i];
+            if(mmap.find(rem) != mmap.end()){
+                ans[0] = mmap[rem];
+                ans[1] = i;
+                break;
+            }
+                mmap[nums[i]] = i;
+        }
+        return ans;
+    }
+};
+
+Time Complexity: O(n)
+Space Complexity: O(n)
