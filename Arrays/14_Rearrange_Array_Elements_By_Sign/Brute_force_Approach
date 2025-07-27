@@ -1,0 +1,36 @@
+class Solution {
+public:
+    vector<int> rearrangeArray(vector<int>& nums) {
+        int size = nums.size();
+        vector<int> pos(size);
+        vector<int> neg(size);
+        vector<int> ans(size);
+        int m = 0, n = 0;
+        for(int i = 0; i < size; i++){
+            if(nums[i] > 0){
+                pos[m] = nums[i];
+                ++m;
+            }else{
+                neg[n] = nums[i];
+                ++n;
+            }
+        }
+        int index1 = 0, index2 = 1;
+        int i = 0;
+        while(i < m){
+            ans[index1] = pos[i];
+            ++i;
+            index1+=2;
+        }
+        i = 0;
+         while(i < n){
+            ans[index2] = neg[i];
+            ++i;
+            index2+=2;
+        }
+        return ans;
+    }
+};
+
+Time Complexity: O(n)
+Space Complexity: O(n)
