@@ -1,0 +1,23 @@
+class Solution {
+public:
+    int maxSubArray(vector<int>& nums) {
+        int n = nums.size();
+        int i = 0, j = 0;
+        int curr_sum = 0, max_sum = INT_MIN;
+        while(i <= j && j < n){
+            curr_sum += nums[j];
+            if(curr_sum > max_sum){
+                max_sum = curr_sum;
+            }
+            if(curr_sum < 0){
+                i = j;
+                curr_sum = 0;
+            }
+            ++j;
+        }
+        return max_sum;
+    }
+};
+
+Time Complexity: O(n)
+Space Complexity: O(1)
