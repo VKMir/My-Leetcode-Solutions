@@ -1,0 +1,31 @@
+class Solution {
+public:
+    void reverse(vector<int>& row, int size){
+        int start = 0, end = size - 1;
+        while(start < end){
+            int temp = row[start];
+            row[start] = row[end];
+            row[end] = temp;
+            ++start;
+            --end;
+        }
+    }
+    void rotate(vector<vector<int>>& matrix) {
+        int rows = matrix.size();
+        int cols = matrix[0].size();
+        for(int i = 0; i < rows; i++){
+            for(int j = i + 1; j < cols; j++){
+                int temp = matrix[i][j];
+                matrix[i][j] = matrix[j][i];
+                matrix[j][i] = temp;
+            }
+        }
+        for(int i = 0; i < rows; i ++){
+            reverse(matrix[i], cols);
+        }
+    }
+};
+
+
+Time Complexity: O(n^2)
+Space Complexity: O(1)
