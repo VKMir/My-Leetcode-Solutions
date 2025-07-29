@@ -1,0 +1,45 @@
+class Solution {
+public:
+    void swap(vector<int>& nums, int index1, int index2){
+        int temp = nums[index1];
+        nums[index1] = nums[index2];
+        nums[index2] = temp;
+    }
+    void reverse(vector<int>& nums, int start, int end){
+        int i = start, j = end;
+        while(i < j){
+            swap(nums, i, j);
+            ++i;
+            --j;
+        }
+    }
+    void nextPermutation(vector<int>& nums) {
+        int n = nums.size();
+        int index, flag = 0;
+        int max_el = INT_MAX, max_index;
+        for(int i = n - 1; i > 0; i--){
+            if(nums[i-1] < nums[i]){
+               flag = 1;
+               index = i-1;
+               break;
+            }
+        }
+        if(flag == 1){
+        for(int i = n - 1; i > index; i--){
+            if(nums[i] > nums[index]){
+                max_el = nums[i];
+                max_index = i;
+                break;
+            }
+        }
+        swap(nums, index, max_index);
+        reverse(nums, index + 1, n - 1);
+        }else{
+            reverse(nums, 0, n-1);
+        }
+    }
+};
+
+
+Time complexity: O(n)+O(n)+O(1)+O(n) -> O(n)
+Space Complexity: O(1)
