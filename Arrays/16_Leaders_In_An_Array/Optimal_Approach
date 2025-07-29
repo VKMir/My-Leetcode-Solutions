@@ -1,0 +1,20 @@
+class Solution {
+  public:
+    vector<int> leaders(vector<int>& arr) {
+        int n = arr.size();
+        int max_el = INT_MIN;
+        vector<int> ans;
+        for(int i = n - 1; i >= 0; i--){
+            if(arr[i] >= max_el){
+                max_el = arr[i];
+                ans.push_back(max_el);
+            }
+        }
+        reverse(ans.begin(), ans.end());
+        return ans;
+    }
+};
+
+
+Time Complexity: O(n)
+Space Complexity: O(k) [answer vector]
