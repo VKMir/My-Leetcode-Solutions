@@ -1,0 +1,24 @@
+class Solution {
+public:
+    bool isIsomorphic(string s, string t) {
+        int len = s.length();
+        unordered_map<char, char> mmap;
+        int i = 0, j = 0;
+        while(i < len){
+            if(mmap.find(s[i]) == mmap.end()){
+                for(auto& it: mmap){
+                    if(it.second == t[i]) return false;
+                }
+                mmap[s[i]] = t[i];
+            }else{
+                if(t[i] != mmap[s[i]]) return false;
+            }
+            ++i;
+        }
+        return true;
+    }
+};
+
+
+Time Complexity: O(n*m) 
+Space Complexity: O(m)
