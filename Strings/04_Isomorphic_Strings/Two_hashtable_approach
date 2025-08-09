@@ -1,0 +1,24 @@
+class Solution {
+public:
+    bool isIsomorphic(string s, string t) {
+        int len = s.length();
+        vector<int> hash1(256, -1);
+        vector<int> hash2(256, -1); 
+        int i = 0;
+        while(i < len){
+            if(hash1[s[i]] == -1){
+                if(hash2[t[i]] != -1) return false;
+                hash1[s[i]] = t[i];
+                hash2[t[i]] = s[i];
+            }else{
+                if(t[i] != hash1[s[i]]) return false;
+            }
+            ++i;
+        }
+        return true;
+    }
+};
+
+
+Time Complexity: O(n)
+Space Complexity: O(1)
