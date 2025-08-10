@@ -1,0 +1,23 @@
+class Solution {
+public:
+    bool isAnagram(string s, string t) {
+        int m = s.length();
+        int n = t.length();
+        if(m != n) return false;
+        unordered_map<char, int> mmap;
+        for(int i = 0; i < m; i++){
+            ++mmap[s[i]];
+        }
+        for(int i = 0; i < n; i++){
+            if(mmap.find(t[i]) == mmap.end()) return false;
+            --mmap[t[i]];
+            if(mmap[t[i]] == 0) mmap.erase(t[i]);
+        }
+        if(mmap.size() > 0) return false;
+        return true;
+    }
+};
+
+
+Time Complexity: O(n)
+Space Complexity: O(n)
