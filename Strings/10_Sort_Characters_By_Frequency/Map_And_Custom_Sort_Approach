@@ -1,0 +1,24 @@
+class Solution {
+public:
+    static bool compare(const pair<char, int> p1, const pair<char, int> p2){
+        return p1.second > p2.second;
+    } 
+    string frequencySort(string s) {
+        int len = s.length();
+        string ans = "";
+        unordered_map<char, int> mmap;
+        for(int i = 0; i < len; i++){
+            ++mmap[s[i]];
+        }
+        vector<pair<char, int>> map(mmap.begin(), mmap.end());
+        sort(map.begin(), map.end(), compare);
+        for(auto& it: map){
+            ans.append(it.second, it.first);
+        }
+        return ans;
+    }
+};
+
+
+Time Complexity: O(n + k log k)
+Space Complexity: O(k)
