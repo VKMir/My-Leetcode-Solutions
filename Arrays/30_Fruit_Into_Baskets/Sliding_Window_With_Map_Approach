@@ -1,0 +1,25 @@
+class Solution {
+public:
+    int totalFruit(vector<int>& fruits) {
+        int n = fruits.size();
+        unordered_map<int, int> mmap;
+        int max_count = 0;
+        int i = 0, j = 0;
+        while(j < n){
+            int fruit = fruits[j];  
+            ++mmap[fruit];
+            while(mmap.size() > 2){
+                --mmap[fruits[i]];
+                if(mmap[fruits[i]] == 0) mmap.erase(fruits[i]);
+                ++i;
+            }
+            max_count = max(max_count, j - i + 1);
+            ++j;
+        }
+        return max_count;
+    }
+};
+
+
+Time Complexity: O(n)
+Space Complexity: O(1)
