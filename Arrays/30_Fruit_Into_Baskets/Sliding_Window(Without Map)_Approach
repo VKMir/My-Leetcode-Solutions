@@ -1,0 +1,39 @@
+class Solution {
+public:
+    int totalFruit(vector<int>& fruits) {
+        int n = fruits.size();
+        int first = fruits[0], second = -1;
+        int first_count = 0, second_count = 0;
+        int max_count = 0;
+        int i = 0, j = 0;
+        while(j < n){
+            int fruit = fruits[j];
+            if (fruit == first){
+                ++first_count;
+            }else if (fruit == second){
+                ++second_count;
+            }else{
+                while (first_count > 0 && second_count > 0){
+                    if (fruits[i] == first) --first_count;
+                    else --second_count;
+                    ++i;
+                }
+                if (first_count == 0){
+                    first = fruit;
+                    first_count = 1;
+                }else{
+                    second = fruit;
+                    second_count = 1;
+                }
+            }
+            max_count = max(max_count, j - i + 1);
+            ++j;
+        }
+        return max_count;
+    }
+};
+
+
+
+Time Complexity: O(n)
+Space Complexity: O(1)
