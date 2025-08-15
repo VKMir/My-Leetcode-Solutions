@@ -1,0 +1,28 @@
+class Solution {
+public:
+    int findPalindromeLength(string s, int len, int l, int r){
+        while(l >= 0 && r < len && s[l] == s[r]){
+            --l;
+            ++r;
+        }
+        return r - l - 1;
+    }
+    string longestPalindrome(string s) {
+        int len = s.length();
+        int start = 0, end = 0;
+        for(int i = 0; i < len; i++){
+            int odd = findPalindromeLength(s, len, i, i);
+            int even = findPalindromeLength(s, len, i, i + 1);
+            int max_length = max(odd, even);
+            if(max_length > end - start){
+                start = i - (max_length - 1) / 2;
+                end = (max_length / 2) + i;
+            }
+        }
+        return s.substr(start, end - start + 1);
+    }
+};
+
+
+Time Complexity: O(n^2)
+Space Compelxity: O(1)
