@@ -1,0 +1,23 @@
+class Solution {
+public:
+    int lengthOfLongestSubstring(string s) {
+        int len = s.length();
+        int max_len = 0;
+        unordered_map<char, int> mmap;
+        int i = 0, j = 0;
+        while(i <= j && j < len){
+            ++mmap[s[j]];
+            while(i <= j && mmap[s[j]] > 1){
+                --mmap[s[i]];
+                ++i;
+            }
+            max_len = max(max_len, j - i + 1);
+            ++j;
+        }
+        return max_len;
+    }
+};
+
+
+Time Complexity: O(n)
+Space Complexity: O(k)
