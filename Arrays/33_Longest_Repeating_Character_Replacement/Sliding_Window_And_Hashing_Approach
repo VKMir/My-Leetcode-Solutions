@@ -1,0 +1,25 @@
+class Solution {
+public:
+    int characterReplacement(string s, int k) {
+        int len = s.length();
+        unordered_map<char, int> mmap;
+        int max_freq = 0;
+        int max_len = 0;
+        int i = 0, j = 0;
+        while(i <= j && j < len){
+            ++mmap[s[j]];
+            max_freq = max(max_freq, mmap[s[j]]);
+            while((j - i + 1) - max_freq > k){
+               --mmap[s[i]];
+               ++i;
+            }
+             max_len = max(max_len, j - i + 1);
+             ++j;
+        }
+        return max_len;
+    }
+};
+
+
+Time Complexity: O(n)
+Space Complexity: O(k)
