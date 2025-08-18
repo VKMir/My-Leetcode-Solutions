@@ -1,0 +1,26 @@
+class Solution {
+public:
+    int findAtmostSum(vector<int>& nums, int k){
+        int n = nums.size();
+        int num_arrays = 0;
+        int c = 0;
+        int i = 0, j = 0;
+        while(i <= j && j < n){
+            if(nums[j] == 1) ++c;
+            while(c > k && i <= j){  
+                if(nums[i] == 1) --c;
+                ++i;
+            }
+            num_arrays += j - i + 1;
+            ++j;
+        }
+        return num_arrays;
+    }
+    int numSubarraysWithSum(vector<int>& nums, int goal) {
+       return findAtmostSum(nums, goal) - findAtmostSum(nums, goal - 1);
+    }
+};
+
+
+Time Complexity: O(n)
+Space Complexity: O(1)
