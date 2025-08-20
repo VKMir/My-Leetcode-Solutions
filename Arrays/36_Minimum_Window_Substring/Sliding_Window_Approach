@@ -1,0 +1,35 @@
+class Solution {
+public:
+    string minWindow(string s, string t) {
+        int m = s.length();
+        int n = t.length();
+        int min_len = INT_MAX;
+        unordered_map<char, int> mmap;
+        int l = 0, r = 0;
+        int start = -1;
+        int c = 0;
+        for(int i = 0; i < n; i++){
+            ++mmap[t[i]];
+        }
+        while(l <= r && r < m){
+            --mmap[s[r]];
+            if(mmap[s[r]] >= 0) ++c;
+            while(c == n){
+                if(r - l + 1 < min_len){
+                    min_len = min(min_len, r - l + 1);
+                    start = l;
+                }
+                ++mmap[s[l]];
+                if(mmap[s[l]] > 0) --c;
+                ++l;
+            }
+            ++r;
+            }
+          
+        return (start == -1) ? "" : s.substr(start, min_len);
+    }
+};
+
+
+Time Complexity: O(m)
+Space Complexity: O(n)
