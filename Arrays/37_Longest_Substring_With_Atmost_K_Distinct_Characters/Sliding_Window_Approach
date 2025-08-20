@@ -1,0 +1,23 @@
+int findLongestString(string s, int k){ 
+     int len = s.length(); 
+     int max_len = 0; 
+     unordered_map<char, int> mmap; 
+     int i = 0, j = 0; 
+     while(i <= j && j < len){ 
+          ++mmap[s[j]]; 
+          if(mmap.size() <= k){ 
+               max_len = max(max_len, j - i + 1); 
+          } 
+          while(mmap.size() > k){ 
+               --mmap[s[i]]; 
+               if(mmap[s[i]] == 0) mmap.erase(s[i]); 
+               ++i; 
+           } 
+          ++j; 
+      } 
+      return max_len; 
+ }
+
+
+Time Complexity: O(n)
+Space Complexity: O(k) 
