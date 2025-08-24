@@ -1,0 +1,31 @@
+class Solution {
+public:
+    int smallestDivisor(vector<int>& nums, int threshold) {
+        int n = nums.size();
+        int ans = -1;
+        int max_val = INT_MIN;
+        for(int i = 0; i < n; i ++){
+            max_val = max(max_val, nums[i]);
+        }
+        int beg = 1, end = max_val;
+        while(beg <= end){
+            int mid = (beg + end)/2;
+            int sum = 0;
+            for(int i = 0; i < n; i++){
+                sum += (nums[i] / mid);
+                if(nums[i] % mid) ++sum;
+            }
+            if(sum <= threshold){
+                ans = mid;
+                end = mid - 1;
+            }else{
+                beg = mid + 1;
+            }
+        }
+        return ans;
+    }
+};
+
+
+Time Complexity: O(n log(max_val))
+Space Complexity: O(1)
