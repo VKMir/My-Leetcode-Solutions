@@ -1,0 +1,40 @@
+class Solution {
+public:
+    int minDays(vector<int>& bloomDay, int m, int k) {
+        int n = bloomDay.size();
+        if((long long) m * k > n) return -1;
+        int ans = -1;
+        int min_val = INT_MAX, max_val = INT_MIN;
+        for(int i = 0; i < n; i++){
+            min_val = min(min_val, bloomDay[i]);
+            max_val = max(max_val, bloomDay[i]);
+        }
+        int beg = min_val, end = max_val;
+        while(beg <= end){
+            int mid = (beg + end) / 2;
+            int bouquets = 0, count = 0; 
+            for(int i = 0; i < n; i++){
+                if(bloomDay[i] <= mid){
+                    ++count;
+                }else{
+                    count = 0;
+                }
+                if(count == k){
+                    ++bouquets;
+                    count = 0;
+                }
+            }
+            if(bouquets >= m){
+                ans = mid;
+                end = mid - 1;
+            }else{
+                beg = mid + 1;
+            }
+        }
+        return ans;
+    }
+};
+
+
+Time Complexity: O(n log(max_val - min_val))
+Space Complexity: O(1)
