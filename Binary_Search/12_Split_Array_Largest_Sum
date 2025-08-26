@@ -1,0 +1,42 @@
+class Solution {
+public:
+    bool isPossible(vector<int>& nums, int k, int mid){
+        int n = nums.size();
+        int count = 1;
+        int cur_sum = 0;
+        for(int i = 0;i < n; i++){
+            cur_sum += nums[i];
+            if(cur_sum > mid){
+                ++count;
+                cur_sum = nums[i];
+            }
+            if(count > k) return false;
+        }
+        return true;
+    }
+    int splitArray(vector<int>& nums, int k) {
+        int n = nums.size();
+        int ans = -1;
+        int sum = 0, max_val = INT_MIN;
+        for(int i = 0; i < n; i ++){
+            max_val = max(max_val, nums[i]);
+            sum += nums[i];
+        }
+        int beg = max_val, end = sum;
+        while(beg <= end){
+            int mid = (beg + end) / 2;
+            int count = 0, cur_sum = 0;
+            if(isPossible(nums, k, mid)){
+                ans = mid;
+                end = mid - 1;
+            }else{
+                beg = mid + 1;
+            }
+        }
+        return ans;
+    }
+};
+
+
+Time Complexity: O(n log(sum))
+Space Complexity: O(1)
