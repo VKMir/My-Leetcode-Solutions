@@ -1,0 +1,16 @@
+class Solution {
+public:
+    long long flowerGame(int n, int m) {
+        long long ans;
+        long long even_count_x = n / 2;
+        long long odd_count_x = (n % 2 == 0) ? (n / 2) : ((n / 2) + 1);
+        long long even_count_y = m / 2;
+        long long odd_count_y = (m % 2 == 0) ? (m / 2) : ((m / 2) + 1);
+        ans = (even_count_x * odd_count_y) + (even_count_y * odd_count_x);
+        return ans;
+    }
+};
+
+
+Time Complexity: O(1)
+Space Complexity: O(1)
