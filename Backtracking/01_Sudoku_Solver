@@ -1,0 +1,44 @@
+class Solution {
+public:
+    bool findSudokuNumbers(vector<vector<char>>& board, int r, int c, unordered_map<int, unordered_set<char>>& rows, unordered_map<int, unordered_set<char>>& cols, map<pair<int, int>, unordered_set<char>>& sq){
+        if(r == 9) return true;
+        if(c == 9) return findSudokuNumbers(board, r + 1, 0, rows, cols, sq);
+        if(board[r][c] != '.')
+            return findSudokuNumbers(board, r, c + 1, rows, cols, sq);
+        pair<int, int> sq_indices = {r / 3, c / 3};
+        for(char num = '1'; num <= '9'; num++){
+            if(rows[r].count(num) || cols[c].count(num) || sq[sq_indices].count(num)){
+                continue;
+            }
+                rows[r].insert(num);
+                cols[c].insert(num);
+                sq[sq_indices].insert(num);
+                board[r][c] = num;
+                if(findSudokuNumbers(board, r, c + 1, rows, cols, sq))          return true;
+        rows[r].erase(num );
+        cols[c].erase(num);
+        sq[sq_indices].erase(num);
+        board[r][c] = '.';
+        }
+        return false;
+    }
+    void solveSudoku(vector<vector<char>>& board) {
+        unordered_map<int, unordered_set<char>> rows, cols;
+        map<pair<int, int>, unordered_set<char>> sq;
+        for(int i = 0; i < 9; i++){
+            for(int j = 0; j < 9; j++){
+                pair<int, int> sq_indices = {i / 3, j / 3};
+                if(board[i][j] != '.'){
+                    rows[i].insert(board[i][j]);
+                    cols[j].insert(board[i][j]);
+                    sq[sq_indices].insert(board[i][j]);
+                }
+            }
+        }
+        findSudokuNumbers(board, 0, 0, rows, cols, sq);
+    }
+};
+
+
+Time Complexity: O(9^81)
+Space Complexity: O(1)
