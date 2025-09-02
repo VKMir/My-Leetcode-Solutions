@@ -1,0 +1,28 @@
+class Solution {
+public:
+    void FillParenthesis(int n, int open, int closed, string& s, vector<string>& ans){
+        if(open == n && open == closed){
+            ans.push_back(s);
+        }
+        if(open < n){
+            s += '(';
+            FillParenthesis(n, open + 1, closed, s, ans);
+            s.pop_back();
+        }
+        if(closed < open){
+            s += ')';
+            FillParenthesis(n, open, closed + 1, s, ans);
+            s.pop_back();
+        }
+    }
+    vector<string> generateParenthesis(int n) {
+        vector<string> ans;
+        string s;
+        FillParenthesis(n, 0, 0, s, ans);
+        return ans;
+    }
+};
+
+
+Time Complexity: O(4^n / (n)^1/2)
+Space Complexity: O(1)
