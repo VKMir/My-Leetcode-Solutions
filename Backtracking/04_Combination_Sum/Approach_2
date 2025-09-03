@@ -1,0 +1,27 @@
+class Solution {
+public:
+    void findComb(vector<int>& candidates, int n, int target, int index, vector<int>& set, vector<vector<int>>& ans) {
+        if(target == 0){
+            ans.push_back(set);
+            return;
+        }
+        for(int i = index; i < n; i++){
+            if(candidates[i] <= target){
+                set.push_back(candidates[i]);
+                findComb(candidates, n, target - candidates[i], i, set, ans);
+                set.pop_back();
+            }
+        }
+    }
+    vector<vector<int>> combinationSum(vector<int>& candidates, int target) {
+        int n = candidates.size();
+        vector<int> set;
+        vector<vector<int>> ans;
+        findComb(candidates, n, target, 0, set, ans);
+        return ans;
+    }
+};
+
+
+Time Complexity: O(n^(T/m))
+Space Complexity:O(T/m)
