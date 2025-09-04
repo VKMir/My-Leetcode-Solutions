@@ -1,0 +1,18 @@
+class Solution {
+public:
+    int findClosest(int x, int y, int z) {
+       int diff_x = abs(z - x);
+       int diff_y = abs(z - y);
+       if(diff_x == diff_y){
+        return 0;
+       }else if(diff_x < diff_y){
+        return 1;
+       }else{
+        return 2;
+       }
+       return -1;
+    }
+};
+
+Time Complexity: O(1)
+Space Complexity: O(1)
