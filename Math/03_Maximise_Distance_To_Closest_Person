@@ -1,0 +1,25 @@
+class Solution {
+public:
+    int maxDistToClosest(vector<int>& seats) {
+        int n = seats.size();
+        int i = 0, j = 0;
+        int max_distance = INT_MIN;
+        while(seats[i] != 1) ++i;
+        max_distance = max(max_distance, i);
+        j = i;
+        while(i <= j && j < n){
+            if(seats[j] == 1){
+                max_distance = max(max_distance, (j - i)/2);
+                i = j;
+            }
+            ++j;
+        }
+        if(seats[n - 1] == 0)
+            max_distance = max(max_distance, j - i - 1);
+        return max_distance;
+    }
+};
+
+
+Time Complexity: O(n)
+Space Complexity: O(1)
