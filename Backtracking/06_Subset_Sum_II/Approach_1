@@ -1,0 +1,24 @@
+class Solution {
+public:
+    void findPowerSet(vector<int>& nums, int n, int index, vector<int>& set, vector<vector<int>>& ans){
+       ans.push_back(set);
+       for(int i = index; i < n; i++){
+         if(i != index && nums[i]==nums[i-1]) continue;
+            set.push_back(nums[i]);
+            findPowerSet(nums, n, i + 1, set, ans);
+            set.pop_back();
+       }
+    }
+    vector<vector<int>> subsetsWithDup(vector<int>& nums) {
+        int n = nums.size();
+        sort(nums.begin(), nums.end());
+        vector<vector<int>> ans;
+        vector<int> set;
+        findPowerSet(nums, n, 0, set, ans);
+        return ans;
+    }
+};
+
+
+Time Complexity: O(2^n)
+Space Complexity: O(n)
