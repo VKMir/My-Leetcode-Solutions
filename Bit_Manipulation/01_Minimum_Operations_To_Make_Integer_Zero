@@ -1,0 +1,19 @@
+class Solution {
+public:
+    int makeTheIntegerZero(int num1, int num2) {
+        if (num1 == 0) return 0; 
+        for (int k = 1; k <= 60; k++) {
+        long long target = (long long)num1 - (long long)k * num2;
+        if (target <= 0) {
+            continue;
+        }
+        int ones = __builtin_popcountll(target);
+        if (ones <= k && k <= target) return k;
+    }
+    return -1;
+    }
+};
+
+
+Time Complexity: O(1) [Since, always O(60)]
+Space Complexity: O(1)
