@@ -1,0 +1,19 @@
+class Solution {
+public:
+    vector<int> sumZero(int n) {
+        bool even = (n % 2 == 0) ? true : false;
+        vector<int> ans;
+        int half = n / 2;
+        while(half > 0){
+            ans.push_back(half);
+            ans.push_back(-half);
+            --half;
+        }
+        if(!even) ans.push_back(0);
+        return ans;
+    }
+};
+
+
+Time Complexity: O(n / 2)
+Space Complexity: O(n) [output vector]
