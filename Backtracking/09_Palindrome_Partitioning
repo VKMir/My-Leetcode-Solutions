@@ -1,0 +1,43 @@
+class Solution {
+public:
+    bool isPalindrome(string str){
+        int len = str.size();
+        if(len == 1) return true;
+        int i = 0, j = len - 1;
+        while(i < j){
+            if(str[i] != str[j]) return false;
+            ++i;
+            --j;
+        }
+        return true; 
+    } 
+    void findPartitions(int index, string s, string t, vector<string>& str, vector<vector<string>>& ans){
+        if(index == s.size()){
+            ans.push_back(str);
+            return;
+        }
+        for(int i = index; i < s.size(); i++){
+            t += s[i];
+            if(isPalindrome(t)){
+                str.push_back(t);
+                findPartitions(i + 1, s, "", str, ans);
+                str.pop_back();
+            }else{
+                return;
+            }
+        }
+    } 
+    vector<vector<string>> partition(string s) {
+        int len = s.length();
+        vector<string> str;
+        vector<vector<string>> ans;
+        string t = "";
+        findPartitions(0, s, t, str, ans);
+        return ans;
+    }
+};
+
+
+
+Time Complexity: O(n * 2^n)
+Space Complexity: O(n * 2^n) [recursive stack] 
