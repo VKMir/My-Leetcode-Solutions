@@ -1,0 +1,16 @@
+class Solution {
+public:
+    int minimumOperations(vector<int>& nums) {
+        int n = nums.size();
+        int num_ops = 0;
+        for(int i = 0; i < n; i++){
+            if(nums[i] % 3)
+                ++num_ops;
+        }
+        return num_ops;
+    }
+};
+
+
+Time Complexity: O(n)
+Space Complexity: O(1)
