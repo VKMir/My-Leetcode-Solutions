@@ -1,0 +1,26 @@
+class Solution {
+public:
+    int countTrapezoids(vector<vector<int>>& points) {
+        int n = points.size();
+        long long mod = 1e9 + 7;
+        unordered_map<int, int> mmap;
+        for(int i = 0; i < n; i++){
+            ++mmap[points[i][1]];
+        }
+        long long sum = 0;
+        long long ans = 0;
+        for(auto& it: mmap){
+            long long val = it.second;
+            long long num_lines = (val*(val - 1)) / 2;
+            ans += sum * num_lines;
+            ans %= mod;
+            sum += num_lines;
+            sum %= mod;
+        }
+        return ans;
+    }
+};
+
+
+Time Complexity: O(n)
+Space Complexity: O(n)
