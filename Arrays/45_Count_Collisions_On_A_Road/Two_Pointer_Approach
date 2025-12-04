@@ -1,0 +1,18 @@
+class Solution {
+public:
+    int countCollisions(string directions) {
+        int len = directions.length();
+        int count = 0;
+        int l = 0, h = len - 1;
+        while(l < len && directions[l] == 'L') ++l;
+        while(h >= 0 && directions[h] == 'R') --h;
+        for(int i = l; i <= h; i++){
+            if(directions[i] != 'S') ++count;
+        }
+        return count;
+    }
+};
+
+
+Time Complexity: O(n)
+Space Complexity: O(1)
