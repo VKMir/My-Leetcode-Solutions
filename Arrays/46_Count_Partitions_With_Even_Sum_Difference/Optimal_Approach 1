@@ -1,0 +1,23 @@
+class Solution {
+public:
+    int countPartitions(vector<int>& nums) {
+        int n = nums.size();
+        int total = 0;
+        int count = 0;
+        for(int i = 0; i < n; i++){
+            total += nums[i];
+        }
+        int left_sum = total, right_sum = 0;
+        for(int i = n - 2; i >= 0; i--){
+            left_sum -= nums[i + 1];
+            right_sum += nums[i + 1];
+            int diff = left_sum - right_sum;
+            if(diff % 2 == 0) ++count; 
+        }
+        return count;
+    }
+};
+
+
+Time Complexity: O(n)
+Space Complexity: O(1)
